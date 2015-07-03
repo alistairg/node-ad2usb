@@ -134,7 +134,7 @@ class Alarm extends EventEmitter
     ###
     Raw Emit RF state
     ###
-    @emit "rfraw", "{serial},{status.supervision},{status.battery},{status.loop1},{status.loop2},{status.loop3},{status.loop4}"
+    @emit "rfraw", "#{serial},#{status.supervision},#{status.battery},#{status.loop1},#{status.loop2},#{status.loop3},#{status.loop4}"
 
   ###
   Internal: Keep track of the state of the named property. If the property changes, then emit
