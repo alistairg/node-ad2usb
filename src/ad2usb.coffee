@@ -53,7 +53,7 @@ class Alarm extends EventEmitter
     disarmed = sec1.shift() == '1'
     armedAway = sec1.shift() == '1'
     armedStay = sec1.shift() == '1'
-    
+
 
     @state 'backlight', sec1.shift() == '1'
     @state 'programming', sec1.shift() == '1'
@@ -82,11 +82,12 @@ class Alarm extends EventEmitter
     sections.push parts[2].replace(/[\[\]]/g, '')
 
     # Section 4: "****DISARMED****  Ready to Arm  "
-    lcdtext = parts[3].replace(/"/g,"")
-    if lcdtext != @lcdtext
-      @emit 'lcdtext', lcdtext
-      @lcdtext = lcdtext
-    sections.push parts[3]
+    if parts.length > 2
+      lcdtext = parts[3].replace(/"/g,"")
+      if lcdtext != @lcdtext
+        @emit 'lcdtext', lcdtext
+        @lcdtext = lcdtext
+      sections.push parts[3]
 
     # Process arm state events, which also need LCD text
     armedNight = armedStay and lcdtext.indexOf("***NIGHT-STAY***") > -1
@@ -248,4 +249,3 @@ class Alarm extends EventEmitter
 
 
 module.exports = Alarm
-
