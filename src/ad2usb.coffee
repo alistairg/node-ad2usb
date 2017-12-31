@@ -83,10 +83,12 @@ class Alarm extends EventEmitter
 
     # Section 4: "****DISARMED****  Ready to Arm  "
     if parts.length > 2
-      lcdtext = parts[3].replace(/"/g,"")
-      if lcdtext != @lcdtext
-        @emit 'lcdtext', lcdtext
-        @lcdtext = lcdtext
+      lcdtext = parts[3]
+      if typeof lcdtext is 'string' and lcdtext.length > 0
+        lcdtext = lcdtext.replace(/"/g,"")
+        if lcdtext != @lcdtext
+          @emit 'lcdtext', lcdtext
+          @lcdtext = lcdtext
       sections.push parts[3]
 
     # Process arm state events, which also need LCD text
