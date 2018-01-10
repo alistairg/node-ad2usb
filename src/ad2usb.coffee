@@ -89,6 +89,8 @@ class Alarm extends EventEmitter
         if lcdtext != @lcdtext
           @emit 'lcdtext', lcdtext
           @lcdtext = lcdtext
+      else
+        lcdText = ""
       sections.push parts[3]
 
     # Process arm state events, which also need LCD text
